@@ -1,9 +1,9 @@
 #include "BackgroundManager.hpp"
 
-BackgroundManager::BackgroundManager(sf::Texture& bg_texture, sf::FloatRect world_bounds, sf::Vector2f scroll_speed, SceneNode* parent)
+BackgroundManager::BackgroundManager(sf::Texture& bg_texture, sf::FloatRect world_bounds, float y_scroll_speed, SceneNode* parent)
 	: m_bg_texture(bg_texture),
 	m_world_bounds(world_bounds),
-	m_scroll_speed(scroll_speed),
+	m_scroll_speed(y_scroll_speed),
 	m_backgrounds {nullptr, nullptr},
 	m_current_bg_index(),
 	m_repeat_y_offset()
@@ -28,11 +28,11 @@ void BackgroundManager::Initialize()
 
 	//First background is positioned within the camera view
 	m_backgrounds[0]->setPosition(m_world_bounds.left, m_world_bounds.top);
-	m_backgrounds[0]->SetVelocity(m_scroll_speed);
+	m_backgrounds[0]->SetVelocity(sf::Vector2f(0, m_scroll_speed));
 
 	//Second background is positioned above the first
 	m_backgrounds[1]->setPosition(m_world_bounds.left, m_world_bounds.top - m_repeat_y_offset);
-	m_backgrounds[1]->SetVelocity(m_scroll_speed);
+	m_backgrounds[1]->SetVelocity(sf::Vector2f(0, m_scroll_speed));
 }
 
 void BackgroundManager::BuildBackground(SceneNode* parent)

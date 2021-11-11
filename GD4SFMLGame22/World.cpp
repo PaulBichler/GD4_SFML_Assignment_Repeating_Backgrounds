@@ -14,7 +14,7 @@ World::World(sf::RenderWindow& window)
 	, m_scenegraph()
 	, m_scene_layers()
 	, m_world_bounds(0.f, 0.f, m_camera.getSize().x, 1500)
-	, m_spawn_position(m_camera.getSize().x/2.f, m_world_bounds.height - m_camera.getSize().y /2.f)
+	, m_spawn_position(m_camera.getSize().x/2.f, m_world_bounds.height - m_camera.getSize().y / 2.f)
 	, m_scrollspeed(50.f)
 	, m_player_aircraft(nullptr)
 	, m_bg_manager(nullptr)
@@ -69,7 +69,7 @@ void World::BuildScene()
 		m_scenegraph.AttachChild(std::move(layer));
 	}
 
-	m_bg_manager = std::make_unique<BackgroundManager>(m_textures.Get(Textures::kDesert), m_world_bounds, sf::Vector2f(0, m_scrollspeed), m_scene_layers[static_cast<int>(Layers::kBackground)]);
+	m_bg_manager = std::make_unique<BackgroundManager>(m_textures.Get(Textures::kDesert), m_world_bounds, m_scrollspeed, m_scene_layers[static_cast<int>(Layers::kBackground)]);
 
 	//Add player's aircraft
 	std::unique_ptr<Aircraft> leader(new Aircraft(AircraftType::kEagle, m_textures));
